@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: publisher-deployment
+  labels:
+    app: publisher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: publisher
+  template:
+    metadata:
+      labels:
+        app: publisher
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "publisher"
+        dapr.io/app-port: "80" # Replace with your app's port
+    spec:
+      containers:
+      - name: publisher
+        image: publisher # Replace with your Docker image
+        ports:
+        - containerPort: 80 # Replace with your app's port
+
