@@ -8,7 +8,9 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir dapr dapr-ext-grpc
+RUN pip install -r requirements.txt
+ENTRYPOINT ["python"]
+EXPOSE 5001
 
 # Run publisher.py when the container launches
-CMD ["python", "./publisher.py"]
+CMD ["publisher.py"]

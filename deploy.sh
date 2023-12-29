@@ -9,7 +9,7 @@ kubectl apply -f "$MANIFEST_DIR/redis-deployment.yaml"
 
 # Deploy Dapr PubSub Component
 echo "Deploying Dapr PubSub Component..."
-kubectl apply -f "$MANIFEST_DIR/pubsub-component.yaml"
+kubectl apply -f "$MANIFEST_DIR/pubsub-component.yaml" 
 
 # Deploy Publisher Service
 echo "Deploying Publisher Service..."

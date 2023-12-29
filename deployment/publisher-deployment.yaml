@@ -16,11 +16,12 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "publisher"
-        dapr.io/app-port: "80" # Replace with your app's port
+        dapr.io/app-port: "5001" # Replace with your app's port
+        
     spec:
       containers:
       - name: publisher
-        image: publisher # Replace with your Docker image
+        image: publisher:latest
         ports:
-        - containerPort: 80 # Replace with your app's port
-
+        - containerPort: 5001 
+        imagePullPolicy: Never
