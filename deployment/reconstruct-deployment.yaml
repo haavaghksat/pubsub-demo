@@ -16,9 +16,9 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "reconstruct"
+        dapr.io/app-port: "5001"
     spec:
       containers:
       - name: reconstruct
         image: reconstruct:latest
         imagePullPolicy: Never
-

@@ -16,8 +16,9 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "vesseldetector"
+        dapr.io/app-port: "5001"
     spec:
       containers:
       - name: vessel-detector
-        image: publisher:latest
+        image: vessel-detector:latest
         imagePullPolicy: Never

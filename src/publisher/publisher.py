@@ -20,7 +20,7 @@ async def main():
             # Publish a message to the topic 'randomNumbers'
             dapr_client.publish_event(
                 pubsub_name='pubsub',
-                topic_name='randomNumbers',
+                topic_name='sorted_data',
                 data=payload_json,
                 data_content_type='application/json',
             ) 

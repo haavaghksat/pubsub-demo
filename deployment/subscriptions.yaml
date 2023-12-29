@@ -1,0 +1,21 @@
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: sorted-data-subscription
+spec:
+  topic: sorted_data
+  route: /sorted_data
+  pubsubname: pubsub
+scopes:
+- reconstruct
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: reconstructed-data-subscription
+spec:
+  topic: reconstructed_data
+  route: /reconstructed_data
+  pubsubname: pubsub
+scopes:
+- vesseldetector
