@@ -1,23 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: publisher-deployment
+  name: reconstruct-deployment
   labels:
-    app: publisher
+    app: reconstruct
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: publisher
+      app: reconstruct
   template:
     metadata:
       labels:
-        app: publisher
+        app: reconstruct
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "publisher"
+        dapr.io/app-id: "reconstruct"
     spec:
       containers:
-      - name: publisher
-        image: publisher:latest
+      - name: reconstruct
+        image: reconstruct:latest
         imagePullPolicy: Never
+

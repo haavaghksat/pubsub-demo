@@ -15,4 +15,12 @@ kubectl apply -f "$MANIFEST_DIR/pubsub-component.yaml"
 echo "Deploying Publisher Service..."
 kubectl apply -f "$MANIFEST_DIR/publisher-deployment.yaml"
 
+# Deploy Reconstruct Service
+echo "Deploying Reconstruct Service..."
+kubectl apply -f "$MANIFEST_DIR/recobstruct-deployment.yaml"
+
+# Deploy Vesseldetector Service
+echo "Deploying Vesseldetector Service..."
+kubectl apply -f "$MANIFEST_DIR/vesseldetector-deployment.yaml"
+
 echo "All components have been deployed."

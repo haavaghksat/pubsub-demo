@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: publisher-deployment
+  name: vesseldetector-deployment
   labels:
-    app: publisher
+    app: vesseldetector
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: publisher
+      app: vesseldetector
   template:
     metadata:
       labels:
-        app: publisher
+        app: vesseldetector
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "publisher"
+        dapr.io/app-id: "vesseldetector"
     spec:
       containers:
-      - name: publisher
+      - name: vessel-detector
         image: publisher:latest
         imagePullPolicy: Never
