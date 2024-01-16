@@ -21,13 +21,6 @@ echo "Deploying Redis..."
 kubectl apply -f "$MANIFEST_DIR/redis-deployment.yaml"
 kubectl apply -f "$MANIFEST_DIR/redis-service.yaml"
 
-# Deploy KEDA scaledobject
-echo "Deploying Scaled Object..."
-helm repo add kedacore https://kedacore.github.io/charts
-helm repo update
-helm install keda kedacore/keda --namespace keda --create-namespace
-kubectl apply -f "$MANIFEST_DIR/scaledobject-deployment.yaml"
-
 
 # Deploy Dapr PubSub Component
 echo "Deploying Dapr PubSub Component..."
@@ -56,5 +49,8 @@ kubectl apply -f "$MANIFEST_DIR/vesseldetector-deployment.yaml"
 
 # Set up subscriptions
 kubectl apply -f "$MANIFEST_DIR/subscriptions.yaml"
+
+# Deploy open-telemetry +  jaeger??
+#kubectl apply -f "$MANIFEST_DIR/open-telemetry-collector-jaeger.yaml"
 
 echo "All components have been deployed."

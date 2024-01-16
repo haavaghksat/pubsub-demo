@@ -9,13 +9,12 @@ import json
 import logging
 
 app = App()
-logging.info(f"Reconstruct started...")
 
 
 @app.subscribe(pubsub_name='pubsub', topic='sorted_data')
 # Subscription using GRPC
 def sorted_data(event: v1.Event) -> Optional[TopicEventResponse]:
-    logging.info("Received an event with data: ", event.Data())
+    logging.info(f"Reconstruct received event: {event.Data()}")
     # Process the data
     time.sleep(3)
 
@@ -30,10 +29,11 @@ def sorted_data(event: v1.Event) -> Optional[TopicEventResponse]:
                                   data=payload_json,
                                   data_content_type='application/json',
                                   )
-        logging.info(f"Completed reconstruction on data. Sending message to reconstructed_data topic with contents: {payload_json}")
+        logging.info(f"Completed reconstruction on data. Sending message to reconstructed_data topic")
     return TopicEventResponse("success")
 
 
 if __name__ == '__main__':
-    
+    logging.basicConfig(level=logging.INFO)
+    logging.info(f"Reconstruct started...")
     app.run(50051)

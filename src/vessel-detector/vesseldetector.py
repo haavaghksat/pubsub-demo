@@ -9,18 +9,17 @@ import logging
 import numpy as np
 
 app = App()
-logging.info("Vessel detector started...")
 
 
 @app.subscribe(pubsub_name='pubsub', topic='processed_data')
 # Subscription using GRPC
 def reconstructed_data(event: v1.Event) -> Optional[TopicEventResponse]:
     data = event.Data()
-    logging.info(f"Received processed data: {data}")
+    logging.info(f"Vesseldetector received an event: {data}")
     logging.info(f"Performing vessel detection on data....")
     time.sleep(3)
     n_vessels = np.random.randint(0, 10)
-    vessels = [zip(np.random.rand(n_vessels), np.random.rand(n_vessels))]
+    vessels = [x for x in np.random.rand(n_vessels)]
 
     logging.info(f"Completed detecting vessels. Found {n_vessels} vessels")
     with DaprClient() as dapr_client:
@@ -37,6 +36,6 @@ def reconstructed_data(event: v1.Event) -> Optional[TopicEventResponse]:
 
 
 if __name__ == '__main__':
-
     logging.basicConfig(level=logging.INFO)
-    app.run(50053)
+    logging.info("Vessel detector started...")
+    app.run(50051)

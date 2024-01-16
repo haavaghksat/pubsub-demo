@@ -21,7 +21,6 @@ def main():
                 data=payload_json,
                 data_content_type='application/json',
             )
-            logging.info('Published data: ', payload)
             # Wait for 2 seconds
             time.sleep(2)
 
