@@ -9,7 +9,8 @@ COPY . .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
+ENTRYPOINT ["python"]
 
 EXPOSE 50001
-# Run publisher.py when the container launches
-CMD ["python", "./vesseldetector.py"]
+# Run bucketservice.py when the container launches
+CMD ["sarprocessor.py"]

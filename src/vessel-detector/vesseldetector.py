@@ -12,11 +12,11 @@ app = App()
 logging.info("Vessel detector started...")
 
 
-@app.subscribe(pubsub_name='pubsub', topic='reconstructed_data')
+@app.subscribe(pubsub_name='pubsub', topic='processed_data')
 # Subscription using GRPC
 def reconstructed_data(event: v1.Event) -> Optional[TopicEventResponse]:
     data = event.Data()
-    logging.info(f"Received data reconstructed data: {data}")
+    logging.info(f"Received processed data: {data}")
     logging.info(f"Performing vessel detection on data....")
     time.sleep(3)
     n_vessels = np.random.randint(0, 10)

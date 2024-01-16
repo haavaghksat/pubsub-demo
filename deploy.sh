@@ -46,6 +46,10 @@ kubectl apply -f "$MANIFEST_DIR/publisher-deployment.yaml"
 echo "Deploying Reconstruct Service..."
 kubectl apply -f "$MANIFEST_DIR/reconstruct-deployment.yaml"
 
+# Deploy SAR Processor Service
+echo "Deploying SAR Processor Service..."
+kubectl apply -f "$MANIFEST_DIR/sarprocessor-deployment.yaml"
+
 # Deploy Vesseldetector Service
 echo "Deploying Vesseldetector Service..."
 kubectl apply -f "$MANIFEST_DIR/vesseldetector-deployment.yaml"

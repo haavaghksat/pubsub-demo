@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sarprocessor-deployment
+  labels:
+    app: sarprocessor
+spec:
+
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sarprocessor
+  template:
+    metadata:
+      labels:
+        app: sarprocessor
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "sarprocessor"
+        dapr.io/app-protocol: "grpc"
+        dapr.io/app-port: "50051"
+    spec:
+      volumes:
+        - name: data-volume
+          emptyDir: { }
+      containers:
+      - name: sarprocessor
+        image: sarprocessor:latest
+        env:
+          - name: SHARED_FILE_PATH
+            value: "/var/data"
+        imagePullPolicy: Never
+        volumeMounts:
+          - name: data-volume
+            mountPath: /var/data
+      - name: bucketservice
+        image: bucketservice:latest
+        env:
+          - name: SHARED_FILE_PATH
+            value: "/var/data"
+        imagePullPolicy: Never
+        volumeMounts:
+          - name: data-volume
+            mountPath: /var/data
+

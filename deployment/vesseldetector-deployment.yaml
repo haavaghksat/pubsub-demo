@@ -16,7 +16,8 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "vesseldetector"
-        dapr.io/app-port: "5001"
+        dapr.io/app-protocol: "grpc"
+        dapr.io/app-port: "50051"
     spec:
       containers:
       - name: vessel-detector

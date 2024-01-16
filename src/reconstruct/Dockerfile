@@ -12,5 +12,5 @@ RUN pip install -r requirements.txt
 ENTRYPOINT ["python"]
 
 EXPOSE 50001
-# Run reconstruct.py when the container launches
+# Run bucketservice.py when the container launches
 CMD ["reconstruct.py"]

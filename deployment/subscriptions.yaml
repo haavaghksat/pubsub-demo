@@ -19,4 +19,17 @@ spec:
   route: /reconstructed_data
   pubsubname: pubsub
 scopes:
+- sarprocessor
+
+---
+
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: processed-data-subscription
+spec:
+  topic: processed_data
+  route: /processed_data
+  pubsubname: pubsub
+scopes:
 - vesseldetector

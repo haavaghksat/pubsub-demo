@@ -24,6 +24,4 @@ spec:
       - name: reconstruct
         image: reconstruct:latest
         imagePullPolicy: Never
-        volumeMounts:
-          - name: data-volume # Mount the volume to the container
-            mountPath: /var/data # Mount it to the log directory
+
