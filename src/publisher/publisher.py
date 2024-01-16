@@ -12,7 +12,7 @@ def main():
             # Generate a random payload
             payload = {"number": random.randint(1, 100)}
             payload_json = json.dumps(payload).encode('utf-8')
-            logging.info(f"Publishing event: {payload}")
+            logging.info(f"Publisher publishing random event: {payload}")
 
             # Publish a message to the topic sorted_data
             dapr_client.publish_event(

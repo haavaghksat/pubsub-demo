@@ -14,7 +14,7 @@ app = App()
 @app.subscribe(pubsub_name='pubsub', topic='sorted_data')
 # Subscription using GRPC
 def sorted_data(event: v1.Event) -> Optional[TopicEventResponse]:
-    logging.info(f"Reconstruct received event: {event.Data()}")
+    logging.info(f"Reconstruct received event on sorted_data topic")
     # Process the data
     time.sleep(3)
 

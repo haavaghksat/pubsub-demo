@@ -14,14 +14,13 @@ app = App()
 @app.subscribe(pubsub_name='pubsub', topic='processed_data')
 # Subscription using GRPC
 def reconstructed_data(event: v1.Event) -> Optional[TopicEventResponse]:
-    data = event.Data()
-    logging.info(f"Vesseldetector received an event: {data}")
+    logging.info(f"Vesseldetector received an event on topic processed_data")
     logging.info(f"Performing vessel detection on data....")
     time.sleep(3)
     n_vessels = np.random.randint(0, 10)
     vessels = [x for x in np.random.rand(n_vessels)]
 
-    logging.info(f"Completed detecting vessels. Found {n_vessels} vessels")
+    logging.info(f"Completed detecting vessels. Found {n_vessels} vessels: {vessels}")
     with DaprClient() as dapr_client:
         # Send message
         payload = {"Vessels": vessels}
@@ -31,7 +30,7 @@ def reconstructed_data(event: v1.Event) -> Optional[TopicEventResponse]:
                                   data=payload_json,
                                   data_content_type='application/json',
                                   )
-    logging.info(f"Published message to detected_vessels topic with data: {payload_json}")
+    logging.info(f"Published message to detected_vessels topic")
     return TopicEventResponse("success")
 
 
