@@ -10,7 +10,7 @@ COPY . .
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 ENTRYPOINT ["python"]
-EXPOSE 5001
+EXPOSE 50001
 
 # Run publisher.py when the container launches
 CMD ["publisher.py"]

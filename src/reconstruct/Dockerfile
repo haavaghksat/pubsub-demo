@@ -9,7 +9,8 @@ COPY . .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
+ENTRYPOINT ["python"]
 
-EXPOSE 5001
-# Run publisher.py when the container launches
-CMD ["python", "./reconstruct.py"]
+EXPOSE 50001
+# Run reconstruct.py when the container launches
+CMD ["reconstruct.py"]

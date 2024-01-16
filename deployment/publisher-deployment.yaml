@@ -21,3 +21,4 @@ spec:
       - name: publisher
         image: publisher:latest
         imagePullPolicy: Never
+

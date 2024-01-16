@@ -1,18 +1,31 @@
 #!/bin/bash
-MANIFEST_DIR="/Users/havardhanssen/projects/work/pubsub-demo/deployment"
+MANIFEST_DIR="/Users/havardg/PycharmProjects/pubsub-demo/deployment"
 
 echo "Starting Kubernetes deployments..."
 
-# Deploy helkeda
-helm install keda kedacore/keda --namespace keda --create-namespace
+kubectl config set-context --current --namespace=default
 
+# Deploy dapr
+helm repo add dapr https://dapr.github.io/helm-charts/
+helm repo update
+# See which chart versions are available
+helm search repo dapr --devel --versions
+helm upgrade --install dapr dapr/dapr \
+--version=1.6 \
+--namespace dapr-system \
+--create-namespace \
+--wait
 
 # Deploy Redis
 echo "Deploying Redis..."
 kubectl apply -f "$MANIFEST_DIR/redis-deployment.yaml"
+kubectl apply -f "$MANIFEST_DIR/redis-service.yaml"
 
-# Deploy scaledobject
+# Deploy KEDA scaledobject
 echo "Deploying Scaled Object..."
+helm repo add kedacore https://kedacore.github.io/charts
+helm repo update
+helm install keda kedacore/keda --namespace keda --create-namespace
 kubectl apply -f "$MANIFEST_DIR/scaledobject-deployment.yaml"
 
 
@@ -36,5 +49,8 @@ kubectl apply -f "$MANIFEST_DIR/reconstruct-deployment.yaml"
 # Deploy Vesseldetector Service
 echo "Deploying Vesseldetector Service..."
 kubectl apply -f "$MANIFEST_DIR/vesseldetector-deployment.yaml"
+
+# Set up subscriptions
+kubectl apply -f "$MANIFEST_DIR/subscriptions.yaml"
 
 echo "All components have been deployed."

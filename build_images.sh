@@ -1,11 +1,9 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Directory containing all projects
-SRC_DIR="/Users/havardhanssen/projects/work/pubsub-demo/src"
+SRC_DIR="/Users/havardg/PycharmProjects/pubsub-demo/src"
 
 PREV_DIR=$(pwd)  # Save the current directory
-
-
 
 # Iterate over each subdirectory in /src
 for dir in "$SRC_DIR"/*; do

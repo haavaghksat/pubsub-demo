@@ -1,32 +1,42 @@
+from typing import Optional
+from cloudevents.sdk.event import v1
+from dapr.ext.grpc import App
 from dapr.clients import DaprClient
-import logging
+from dapr.clients.grpc._response import TopicEventResponse
 import time
 import json
-import random 
-from flask import Flask, request
 import logging
+import numpy as np
 
-app = Flask(__name__)
+app = App()
+logging.info("Vessel detector started...")
 
-@app.route('/reconstructed_data', methods=['POST'])
-def reconstructed_data():
-    data = request.json
-    logging.info(f"Received data: {data}")
+
+@app.subscribe(pubsub_name='pubsub', topic='reconstructed_data')
+# Subscription using GRPC
+def reconstructed_data(event: v1.Event) -> Optional[TopicEventResponse]:
+    data = event.Data()
+    logging.info(f"Received data reconstructed data: {data}")
+    logging.info(f"Performing vessel detection on data....")
     time.sleep(3)
-    # Dapr subscribes to messages using gRPC by default.
+    n_vessels = np.random.randint(0, 10)
+    vessels = [zip(np.random.rand(n_vessels), np.random.rand(n_vessels))]
+
+    logging.info(f"Completed detecting vessels. Found {n_vessels} vessels")
     with DaprClient() as dapr_client:
-        logging.info(f"Received message: {data}")
-        # detect_vessel
-        logging.info(f"Completed vessel detection on data")
-        payload = {"vessel": random.randint(1, 100)}
+        # Send message
+        payload = {"Vessels": vessels}
         payload_json = json.dumps(payload).encode('utf-8')
         dapr_client.publish_event(pubsub_name='pubsub',
-            topic_name='detected_vessels',
-            data=payload_json,
-            data_content_type='application/json',
-        )
+                                  topic_name='detected_vessels',
+                                  data=payload_json,
+                                  data_content_type='application/json',
+                                  )
+    logging.info(f"Published message to detected_vessels topic with data: {payload_json}")
+    return TopicEventResponse("success")
 
 
 if __name__ == '__main__':
+
     logging.basicConfig(level=logging.INFO)
-    app.run(host='0.0.0.0', port=5001)
+    app.run(50053)
