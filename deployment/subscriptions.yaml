@@ -3,8 +3,8 @@ kind: Subscription
 metadata:
   name: sorted-data-subscription
 spec:
-  topic: sorted_data
-  route: /sorted_data
+  topic: uploaded_data
+  route: /uploaded_data
   pubsubname: pubsub
 scopes:
 - reconstruct

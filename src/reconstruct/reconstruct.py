@@ -11,12 +11,13 @@ import logging
 app = App()
 
 
-@app.subscribe(pubsub_name='pubsub', topic='sorted_data')
+@app.subscribe(pubsub_name='pubsub', topic='uploaded_data')
 # Subscription using GRPC
 def sorted_data(event: v1.Event) -> Optional[TopicEventResponse]:
-    logging.info(f"Reconstruct received event on sorted_data topic")
+    logging.info(f"Reconstruct received event on uploaded_data topic")
+    logging.info(f"Reconstructing data with contents: {event.Data()} ...")
     # Process the data
-    time.sleep(3)
+    time.sleep(10)
 
     with DaprClient() as dapr_client:
         # Publish to reconstructed_data topic
